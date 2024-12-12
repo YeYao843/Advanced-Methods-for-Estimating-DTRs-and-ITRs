@@ -1737,6 +1737,12 @@ specified.</p>
 </div>
 <div id="example-1" class="section level4">
 <h4><span style="color:grey;">Example</span></h4>
+<p>In this repository, we give an example under continuous setting with
+correctly specified propensity model and no unmeasured confounders. The
+example code can be found: (<a href="https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning" class="uri">https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning</a>)</p>
+<p><em>Install the requirements before running the code</em>:</p>
+<pre><code>Python2: pip install -r requirements.txt 
+Python3: pip3 install -r rquirements.txt</code></pre>
 </div>
 </div>
 </div>
@@ -1919,10 +1925,11 @@ medicine, where aggressive treatments may enhance efficacy but increase
 long-term risks. In DTRs, early treatments impact both benefits and
 risks of later stages, requiring careful consideration of cumulative
 risk. We introduce a new statistical learning framework called
-<strong>multistage cumulative benefit-risk(CBR)</strong> framework, to
-estimate DTRs by simultaneously maximizing the expected benefit and
-controlling the expected cumulative risk. There are two methods
-developed to solve CBR:</p>
+<strong>multistage cumulative benefit-risk(CBR)</strong> framework given
+the paper “Controlling Cumulative Adverse Risk in Learning Optimal
+Dynamic Treatment Regimens”, to estimate DTRs by simultaneously
+maximizing the expected benefit and controlling the expected cumulative
+risk. There are two methods developed to solve CBR:</p>
 <ul>
 <li><ol style="list-style-type: decimal">
 <li>A backward algorithm based on Q-learning or O-learning with new
@@ -2047,15 +2054,13 @@ materials of the paper.</p>
 <h4><span style="color:grey;">Introduction</span></h4>
 <p>To address the benefit-risk challenge presented in chronic disease,
 we develop a general framework called <strong>benefit-risk DTRs
-(BR-DTRs)</strong> given the paper “Controlling Cumulative Adverse Risk
-in Learning Optimal Dynamic Treatment Regimens”. This framework is
-designed to learn the optimal DTRs in a <strong>multistage</strong>
-study subject to different acute risk constraints at each stage. We
-propose a <strong>backward</strong> procedure to estimate the optimal
-treatment rules by maximizing the expected value function under the
-<strong>risk constraint</strong> imposed at each stage, which can be
-solved as a <strong>constrained support vector machine
-problem</strong>.</p>
+(BR-DTRs)</strong>. This framework is designed to learn the optimal DTRs
+in a <strong>multistage</strong> study subject to different acute risk
+constraints at each stage. We propose a <strong>backward</strong>
+procedure to estimate the optimal treatment rules by maximizing the
+expected value function under the <strong>risk constraint</strong>
+imposed at each stage, which can be solved as a <strong>constrained
+support vector machine problem</strong>.</p>
 </div>
 <div id="method-5" class="section level4">
 <h4><span style="color:grey;">Method</span></h4>

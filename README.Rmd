@@ -193,6 +193,13 @@ The doubly robust M-learning is consistent even if one of the propensity score m
 </p>
 
 #### <span style="color:grey;">Example</span>
+In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning/S1_Obs_cts.py)
+
+*Install the requirements before running the code*:
+```
+Python2: pip install -r requirements.txt 
+Python3: pip3 install -r rquirements.txt
+```
 
 ## 4. Optimal DTR Estimation by Integrating Randomized and Observational Studies
 

@@ -42,6 +42,7 @@ $$
 
 Our **goal** is to determine the optimal DTRs $D^*=(D_{1}^*,D_{2}^*,\dots, D_{K}^*)$ that maximize the above value function. Note that $D_{k}(H_k)=\text{sign}(f_{k}(H_k))$. For clarity, we sometimes denote the value function as $V(f_1, f_2, ... , f_K)$.
 
+## Advanced Learning Methods for DTRs and ITRs Estimation
 
 ### 3.1 Augmented outcome-weighted learning
 

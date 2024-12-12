@@ -356,6 +356,7 @@ $\eta \in (0,1]$ is a shifting parameter to be chosen data dependently
 </p>
 
 #### <span style="color:grey;">Example</span> 
+
 This example demonstrates the implementation of MRL with a linear kernel. The training dataset consists of $n=200$ samples. For additional examples, such as those using Gaussian kernels, please refer to the supplementary materials of the paper.
 
 The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/CBR/example.R)

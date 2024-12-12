@@ -14,7 +14,7 @@ editor_options:
 
 
 ## 1. Background
-This repository offers an overview of various methods aimed at addressing challenges in estimating optimal Dynamic Treatment Regimes (DTRs) and Individualized Treatment Rules (ITRs). Section 2 outlines the general conceptual framework and notations used in the subsequent content. Section 3 presents two methods designed to enhance the efficiency of Outcome Weighted Learning (OWL) in multi-stages and expand its application from randomized controlled trial (RCT) data to electronic health record (EHR) data in a single-stage setting. Section 4 introduces two methods for improving optimal DTR estimation by integrating data from randomized and observational studies. Finally, Section 5 discusses two approaches for assessing optimal DTR estimation with risk control, addressing the benefit-risk tradeoff challenges often encountered in personalized medicine, particularly for chronic diseases. The example given in the repository mostly comes from simulation study. Papers of reference can be found at: (https://github.com/YeYao843/DTR-Method-Summary/tree/main/Reference%20paper)
+This repository offers an overview of various methods aimed at addressing challenges in estimating optimal Dynamic Treatment Regimes (DTRs) and Individualized Treatment Rules (ITRs). Section 2 outlines the general conceptual framework and notations used in the subsequent content. Section 3 presents two methods designed to enhance the efficiency of Outcome Weighted Learning (OWL) in multi-stages and expand its application from randomized controlled trial (RCT) data to electronic health record (EHR) data in a single-stage setting. Section 4 introduces two methods for improving optimal DTR estimation by integrating data from randomized and observational studies. Finally, Section 5 discusses two approaches for assessing optimal DTR estimation with risk control, addressing the benefit-risk tradeoff challenges often encountered in personalized medicine, particularly for chronic diseases. The example given in the repository mostly comes from simulation study. Papers of reference can be found at: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/tree/main/Reference%20paper)
 
 
 ## 2. Conceptual Framework
@@ -193,7 +193,7 @@ The doubly robust M-learning is consistent even if one of the propensity score m
 </p>
 
 #### <span style="color:grey;">Example</span>
-In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning/S1_Obs_cts.py)
+In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/M-Learning/S1_Obs_cts.py)
 
 *Install the requirements before running the code*:
 ```
@@ -358,7 +358,7 @@ $\eta \in (0,1]$ is a shifting parameter to be chosen data dependently
 #### <span style="color:grey;">Example</span> 
 This example demonstrates the implementation of MRL with a linear kernel. The training dataset consists of $n=200$ samples. For additional examples, such as those using Gaussian kernels, please refer to the supplementary materials of the paper.
 
-The example code can be found: (https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R)
+The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/CBR/example.R)
 
 ### 5.2 DTRs to Control Stage-Wise Risks
 #### <span style="color:grey;">Introduction</span>

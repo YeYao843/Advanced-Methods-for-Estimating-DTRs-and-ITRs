@@ -349,12 +349,13 @@ $\eta \in (0,1]$ is a shifting parameter to be chosen data dependently
 </p>
 
 #### <span style="color:grey;">Example</span> 
-
+(https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R)
+This example demonstrates the implementation of MRL with a linear kernel. The training dataset consists of $n=200$ samples. For additional examples, such as those using Gaussian kernels, please refer to the supplementary materials of the paper.
 
 
 ### 5.2 DTRs to Control Stage-Wise Risks
 #### <span style="color:grey;">Introduction</span>
-To address the benefit-risk challenge presented in chronic disease, we develop a general framework called **benefit-risk DTRs (BR-DTRs)**. This framework is designed to learn the optimal DTRs in a **multistage** study subject to different acute risk constraints at each stage. We propose a **backward** procedure to estimate the optimal treatment rules by maximizing the expected value function under the **risk constraint** imposed at each stage, which can be solved as a **constrained support vector machine problem**.
+To address the benefit-risk challenge presented in chronic disease, we develop a general framework called **benefit-risk DTRs (BR-DTRs)** given the paper "Controlling Cumulative Adverse Risk in Learning Optimal Dynamic Treatment Regimens". This framework is designed to learn the optimal DTRs in a **multistage** study subject to different acute risk constraints at each stage. We propose a **backward** procedure to estimate the optimal treatment rules by maximizing the expected value function under the **risk constraint** imposed at each stage, which can be solved as a **constrained support vector machine problem**.
 
 #### <span style="color:grey;">Method</span>
 

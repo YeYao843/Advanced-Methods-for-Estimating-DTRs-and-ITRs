@@ -284,7 +284,7 @@ In this section, we assume that $Y$, $R$ are bounded random variables, represent
 ### 5.1 Multistage Cumulative Benefit-Risk Framework
 
 #### <span style="color:grey;">Introduction</span>
-**Benefit-risk tradeoff** is crucial in personalized medicine, where aggressive treatments may enhance efficacy but increase long-term risks. In DTRs, early treatments impact both benefits and risks of later stages, requiring careful consideration of cumulative risk. We introduce a new statistical learning framework called **multistage cumulative benefit-risk(CBR)** framework, to estimate DTRs by simultaneously maximizing the expected benefit and controlling the expected cumulative risk. There are two methods developed to solve CBR: 
+**Benefit-risk tradeoff** is crucial in personalized medicine, where aggressive treatments may enhance efficacy but increase long-term risks. In DTRs, early treatments impact both benefits and risks of later stages, requiring careful consideration of cumulative risk. We introduce a new statistical learning framework called **multistage cumulative benefit-risk(CBR)** framework given the paper "Controlling Cumulative Adverse Risk in Learning Optimal Dynamic Treatment Regimens", to estimate DTRs by simultaneously maximizing the expected benefit and controlling the expected cumulative risk. There are two methods developed to solve CBR: 
 
 * (1) A backward algorithm based on Q-learning or O-learning with new **"benefit-risk"** outcome
 * (2) A simultaneous algorithm taking advantage of **multistage ramp loss (MRL)** to estimate the DTRs across all stages.
@@ -355,7 +355,7 @@ This example demonstrates the implementation of MRL with a linear kernel. The tr
 
 ### 5.2 DTRs to Control Stage-Wise Risks
 #### <span style="color:grey;">Introduction</span>
-To address the benefit-risk challenge presented in chronic disease, we develop a general framework called **benefit-risk DTRs (BR-DTRs)** given the paper "Controlling Cumulative Adverse Risk in Learning Optimal Dynamic Treatment Regimens". This framework is designed to learn the optimal DTRs in a **multistage** study subject to different acute risk constraints at each stage. We propose a **backward** procedure to estimate the optimal treatment rules by maximizing the expected value function under the **risk constraint** imposed at each stage, which can be solved as a **constrained support vector machine problem**.
+To address the benefit-risk challenge presented in chronic disease, we develop a general framework called **benefit-risk DTRs (BR-DTRs)**. This framework is designed to learn the optimal DTRs in a **multistage** study subject to different acute risk constraints at each stage. We propose a **backward** procedure to estimate the optimal treatment rules by maximizing the expected value function under the **risk constraint** imposed at each stage, which can be solved as a **constrained support vector machine problem**.
 
 #### <span style="color:grey;">Method</span>
 

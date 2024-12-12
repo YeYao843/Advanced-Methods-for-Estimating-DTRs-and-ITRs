@@ -1,0 +1,244 @@
+---
+title: "example"
+output: html_document
+date: "2024-11-18"
+---
+```{r}
+###Packages install###
+library(readr)
+```
+
+
+```{r}
+##Import data(This is a simulated data)###
+simdata <- read_csv("simdata.csv")
+
+```
+
+```{r}
+###Feature Matrix/List Construction###
+#make a function to create lists
+create_list <- function(data, stage_groups, as_df = FALSE) {
+  lapply(stage_groups, function(cols) {
+    result <- do.call(cbind, lapply(cols, function(col) data[[col]]))
+    if (as_df) as.data.frame(result) else result
+  })
+}
+
+# Define column groups by stages 
+stage1var <- c("intercept", "x11", "x21", "x31")
+stage2var <- c("intercept", "x11", "x22", "x32", "resp", "a1")
+stage_groups <- list(stage1var, stage2var)
+
+## Create the lists 
+#feature matrix
+mu1var <- create_list(simdata, stage_groups)
+mu0var <- create_list(simdata, stage_groups)
+#history without intercep
+Hk <- create_list(simdata, list(stage1var[-1], stage2var[-1]), as_df = TRUE)
+MEk <- create_list(rct, stage_groups)
+MEOSk <- create_list(os, stage_groups)
+simdataMEk <- create_list(simdata, stage_groups, as_df = TRUE)
+
+nvars <- 0
+
+```
+
+```{r}
+# inputs for MAQE function
+Yk <- list(simdata$y1, simdata$y2)
+txind <- list(simdata$a1, simdata$a2)
+pi1k <- list(simdata$pa1, simdata$pa2)
+pi0k <- list(1 - simdata$pa1, 1 - simdata$pa2)
+rctind <- simdata$smart
+RCTy <- list(rct$y1, rct$y2)
+RCTa <- list(rct$a1, rct$a2)
+```
+
+```{r}
+ls.solver <- function(x, w1, w2, y){
+  xt <- t(x)
+  xprimewx <- xt%*%w1%*%x
+  invxprimewx <- solve(xprimewx)
+  xprimey <- xt%*%w2%*%y
+  coeff <- invxprimewx%*%xprimey
+  return(coeff)
+}
+
+```
+
+
+```{r}
+muhats.var <- function(mu1var, mu0var, Yk, txind, trialind, group = "RCT") {
+  fit_model <- function(muvar, group_condition) {
+    dataframe <- as.data.frame(cbind(muvar, Yk, txind, trialind))
+    outcome_model <- lm(Yk ~ muvar[, 2:dim(muvar)[2]], data = dataframe, subset = group_condition)
+    as.matrix(outcome_model$coefficients)
+  }
+  
+  # Define group-specific conditions
+  group_conditions <- list(
+    RCTOS = list(tx1 = txind == 1, tx0 = txind == 0),
+    OS = list(tx1 = (txind == 1 & trialind == 0), tx0 = (txind == 0 & trialind == 0)),
+    RCT = list(tx1 = (txind == 1 & trialind == 1), tx0 = (txind == 0 & trialind == 1))
+  )
+  
+  # Get the appropriate conditions for the group
+  conditions <- group_conditions[[group]]
+  
+  # Fit models for A=1 and A=0
+  eta.stage2.1 <- fit_model(mu1var, conditions$tx1)
+  eta.stage2.0 <- fit_model(mu0var, conditions$tx0)
+  
+  # Calculate predicted values
+  mu1.hat <- as.matrix(mu1var) %*% eta.stage2.1
+  mu0.hat <- as.matrix(mu0var) %*% eta.stage2.0
+  
+  # Combine results and set column names
+  muhats <- cbind(mu1.hat, mu0.hat)
+  colnames(muhats) <- c("mu1hat", "mu0hat")
+  return(muhats)
+}
+
+
+```
+
+
+
+```{r}
+MAQE <- function(mu1var, mu0var, txind, Hk, Yk, pi1k, pi0k, rctind, MEk, RCTy, RCTa, group, omegaw){
+  nTrial <- length(MEk[[2]][,1])  # number of rows in trial data = n
+  nplusm <- length(Yk[[2]])  # number of rows in combined data = n+m
+  mOS <- nplusm - nTrial  # number of rows in OS data
+  q <- nTrial/nplusm  # proportion of subjects in trial = n/(n+m)
+  minusq <- 1-q
+  
+  ################################################
+  
+  # the w1 weight matrix is what is used to square the X matrix
+  # the w2 weight matrix assigns weights to outcomes
+  # in this script the MAQE is programmed such that q=1 in all cases, and thus we have removed q from the description of the algorithm in the paper
+  # however, at the user's discretion the weight matrices can be altered such that the outcome vectors can be weighted differently for the trial and OS
+  
+  w1 <- diag(nplusm) # w1 is a (n+m)x(n+m) matrix
+  q1 <- rep(1/nTrial, nTrial) # 1/n for first n elements
+  invm <- rep(0, mOS) # 0 for next m elements
+  diag(w1) <- c(q1, invm)
+  
+  
+  w2 <- diag(nplusm)
+  qwt <- rep(1/n, nTrial) # create vector of 1/n for length of n
+  minusqwt <- rep(1/mOS, mOS) # create vector of 1/m for length of m
+  diag(w2) <- c(qwt, minusqwt) # w2 is (n+m)x(n+m) matrix with 1/n for first n diagonal elements and 1/m for next m diagonal elements
+  
+  ### stage 2  
+  
+  dataframe2 <- as.data.frame(cbind(Hk[[2]], Yk[[2]], txind[[2]]))
+    # get mu hats stage 2
+    muhats2 <- muhats.var(mu1var[[2]], mu0var[[2]], Yk[[2]], txind[[2]], rctind, group)
+
+  # create R hats stage 2
+  i=0
+  Rhat2 <- rep(0,length(Yk[[2]]))
+  for(i in 1:dim(dataframe2)[1]){
+    if(rctind[i]==1){
+      # construct R hat for trial participants
+      Rhat2[i] <- ((txind[[2]][i]/pi1k[[2]][i])*(Yk[[2]][i] - muhats2[i,1])-((1-txind[[2]][i])/pi0k[[2]][i])*(Yk[[2]][i] - muhats2[i,2]) + omegaw*(muhats2[i,1] - muhats2[i,2]))
+    }else if(rctind[i]==0){
+      # construct R hat for OS participants
+      Rhat2[i] <- (1-omegaw)*(muhats2[i,1] - muhats2[i,2])
+    }
+  }
+  
+  # solve for betas stage 2 (tx effects)
+  intercept <- rep(1,length(Yk[[2]]))
+  x2 <- as.matrix(as.data.frame(cbind(intercept, Hk[[2]])))
+  betas_stage2 <- ls.solver(as.matrix(x2), w1, w2, Rhat2)
+  
+  # solve for gammas stage 2 (main effects)
+  
+  x2.trial <- MEk[[2]]
+  x2.trialt <-t(x2.trial)
+
+  #create an estimated value which is observed Y-A(beta_hat * xi) for each trial participant, and call this C hat
+  i=0
+  c.hat2 <- rep(0, nTrial)
+  for(i in 1:nTrial){
+    c.hat2[i] <- RCTy[[2]][i] - RCTa[[2]][i]*(x2.trial[i, 1:dim(MEk[[2]])[2]]%*%betas_stage2)
+  }
+  
+  w.t <- diag(nTrial)
+  gammas_stage2 <- ls.solver(x2.trial, w.t, w.t, c.hat2)
+  
+  # find optimal stage 2 tx for each subject
+  
+  stage2.txrule <- x2%*%betas_stage2
+  stage2.optimal <- ifelse(stage2.txrule > 0, 1, 0)
+  
+  # calculate stage 2 Q hats based on optimal tx
+  
+  stage2.coeff <- c(gammas_stage2, betas_stage2)
+  # then make sure to order covariates in the order that corresponds to the vector of regression coefficients
+  # gammas stage 2 are main effects so
+  # intercept, x1, x2, x3, resp, a1
+  # betas stage 2 are interaction terms with a2 so
+  # a2, x1*a2, x2*a2, x3*a2, resp*a2, a1*a2
+  x2.df <- as.data.frame(x2)
+  xmatrix2.trial <- cbind(x2.df, x2.df*stage2.optimal)
+  
+  i=0
+  stage2Q.hat <- rep(0, nplusm)
+  for(i in 1:nplusm){
+    stage2Q.hat[i] <- as.matrix(xmatrix2.trial[i,1:length(stage2.coeff)])%*%as.matrix(stage2.coeff)
+  }
+  
+  ### stage 1  
+  
+  # get mu hats stage 1
+  
+  # create pseudo outcome for stage 1 to pass as argument into muhats.var function
+  
+  psuedo.outcome <- stage2Q.hat + Yk[[1]]
+  
+  dataframe1 <- as.data.frame(cbind(Hk[[1]], psuedo.outcome, txind[[1]]))
+    muhats1 <- muhats.var(mu1var[[1]], mu0var[[1]], psuedo.outcome, txind[[1]], rctind, group)
+
+  # create R hats stage 1
+  i=0
+  Rhat1 <- rep(0,length(Yk[[1]]))
+  for(i in 1:dim(dataframe1)[1]){
+    if(rctind[i]==1){
+      # construct R hat for trial participants
+      Rhat1[i] <- ((txind[[1]][i]/pi1k[[1]][i])*(psuedo.outcome[i] - muhats1[i,1])-((1-txind[[1]][i])/pi0k[[1]][i])*(psuedo.outcome[i] - muhats1[i,2]) + omegaw*(muhats1[i,1] - muhats1[i,2]))
+    }else if(rctind[i]==0){
+      # construct R hat for OS participants
+      Rhat1[i] <- (1-omegaw)*(muhats1[i,1] - muhats1[i,2])
+    }
+  }
+  # solve for betas stage 1
+  intercept <- rep(1,length(Yk[[1]]))
+  x1 <- as.matrix(as.data.frame(cbind(intercept, Hk[[1]])))
+  betas_stage1 <- ls.solver(x1, w1, w2, Rhat1)
+  
+  # create list with coefficients for both stages
+  s1coeff <- as.data.frame(t(betas_stage1))
+  s2coeff <- as.data.frame(t(betas_stage2))
+  AugMethodAlgorithmResults <- list(s1coeff, s2coeff)
+  names(AugMethodAlgorithmResults) <- c("Stage 1 Coefficients", "Stage 2 Coefficients")
+  
+  return(AugMethodAlgorithmResults)
+  
+  
+}
+
+```
+
+
+```{r}
+MAQE.wTP <- MAQE(mu1var, mu0var, txind, Hk, Yk, pi1k, pi0k, rctind, MEk, RCTy, RCTa, group="RCT", omegaw=omegaw)
+```
+
+```{r}
+MAQE.wTP
+
+```

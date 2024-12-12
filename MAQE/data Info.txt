@@ -1,0 +1,14 @@
+Data Description:
+This 2 stage simulate experiment contains 1000 subjects from observation study and 630 subjects from RCT study. 
+
+Variables (k=1,2 represents measurements at two stages): 
+subject: ID
+x11: age - it is a baseline demographic variable that will be constant during the study
+x2k: binary opioid use which can change between baseline and intermediate time point
+x3k: dichotomized promis depression t score (0=no symptoms, 1=symptoms) which may change between baseline and intermediate time point
+z: unmeasured normal variable with mean=0 and sd=1
+ak: treatment assigment(1=receive treatment; 0=no treatment)
+pak: probability of receiving treatment ak=1
+yk: observed outcome 
+resp: binary variable for whether subjects responded to the treatment(resp = 1 if yk > 60th percentile
+smart: binary variable indicating whether subjects comes from RCT study or OS study (1=RCT; 0=OS)

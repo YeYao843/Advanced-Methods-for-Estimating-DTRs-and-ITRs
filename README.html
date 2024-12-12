@@ -2034,6 +2034,11 @@ parameter to be chosen data dependently</p>
 </div>
 <div id="example-3" class="section level4">
 <h4><span style="color:grey;">Example</span></h4>
+<p>(<a href="https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R" class="uri">https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R</a>)
+This example demonstrates the implementation of MRL with a linear
+kernel. The training dataset consists of <span class="math inline">\(n=200\)</span> samples. For additional examples,
+such as those using Gaussian kernels, please refer to the supplementary
+materials of the paper.</p>
 </div>
 </div>
 <div id="dtrs-to-control-stage-wise-risks" class="section level3">
@@ -2042,13 +2047,15 @@ parameter to be chosen data dependently</p>
 <h4><span style="color:grey;">Introduction</span></h4>
 <p>To address the benefit-risk challenge presented in chronic disease,
 we develop a general framework called <strong>benefit-risk DTRs
-(BR-DTRs)</strong>. This framework is designed to learn the optimal DTRs
-in a <strong>multistage</strong> study subject to different acute risk
-constraints at each stage. We propose a <strong>backward</strong>
-procedure to estimate the optimal treatment rules by maximizing the
-expected value function under the <strong>risk constraint</strong>
-imposed at each stage, which can be solved as a <strong>constrained
-support vector machine problem</strong>.</p>
+(BR-DTRs)</strong> given the paper “Controlling Cumulative Adverse Risk
+in Learning Optimal Dynamic Treatment Regimens”. This framework is
+designed to learn the optimal DTRs in a <strong>multistage</strong>
+study subject to different acute risk constraints at each stage. We
+propose a <strong>backward</strong> procedure to estimate the optimal
+treatment rules by maximizing the expected value function under the
+<strong>risk constraint</strong> imposed at each stage, which can be
+solved as a <strong>constrained support vector machine
+problem</strong>.</p>
 </div>
 <div id="method-5" class="section level4">
 <h4><span style="color:grey;">Method</span></h4>

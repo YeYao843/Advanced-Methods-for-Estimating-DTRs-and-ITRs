@@ -244,7 +244,7 @@ To extract information from EHR data and incorporate it into learning the optima
 </p>
 
 #### <span style="color:grey;">Example</span>
-
+An example under scenario (i), where all features are observed, was given. Kernel M-learning was performed under each strategy. 
 ### 4.2 Multi-Stage Augmented Q-Learning Estimator
 
 #### <span style="color:grey;">Introduction</span>

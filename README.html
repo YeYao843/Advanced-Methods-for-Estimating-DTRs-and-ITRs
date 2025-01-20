@@ -1483,7 +1483,23 @@ border-radius: 0px;
 
 <div id="background" class="section level2">
 <h2>1. Background</h2>
-<p>This repository offers an overview of various methods aimed at
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD This repository offers an overview
+of various methods aimed at addressing challenges in estimating optimal
+Dynamic Treatment Regimes (DTRs) and Individualized Treatment Rules
+(ITRs). Section 2 outlines the general conceptual framework and
+notations used in the subsequent content. Section 3 presents two methods
+designed to enhance the efficiency of Outcome Weighted Learning (OWL) in
+multi-stages and expand its application from randomized controlled trial
+(RCT) data to electronic health record (EHR) data in a single-stage
+setting. Section 4 introduces two methods for improving optimal DTR
+estimation by integrating data from randomized and observational
+studies. Finally, Section 5 discusses two approaches for assessing
+optimal DTR estimation with risk control, addressing the benefit-risk
+tradeoff challenges often encountered in personalized medicine,
+particularly for chronic diseases. The example given in the repository
+mostly comes from simulation study. Papers of reference can be found at:
+(<a href="https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/tree/main/Reference%20paper" class="uri">https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/tree/main/Reference%20paper</a>)
+======= This repository offers an overview of various methods aimed at
 addressing challenges in estimating optimal Dynamic Treatment Regimes
 (DTRs) and Individualized Treatment Rules (ITRs). Section 2 outlines the
 general conceptual framework and notations used in the subsequent
@@ -1497,7 +1513,9 @@ Section 5 discusses two approaches for assessing optimal DTR estimation
 with risk control, addressing the benefit-risk tradeoff challenges often
 encountered in personalized medicine, particularly for chronic diseases.
 The example given in the repository mostly comes from simulation study.
-Papers of reference can be found at: (<a href="https://github.com/YeYao843/DTR-Method-Summary/tree/main/Reference%20paper" class="uri">https://github.com/YeYao843/DTR-Method-Summary/tree/main/Reference%20paper</a>)</p>
+Papers of reference can be found at: (<a href="https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/tree/main/Reference%20paper" class="uri">https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/tree/main/Reference%20paper</a>)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+f0b330a0fb3b914ee2ef0b96387d99c566f87c62</p>
 </div>
 <div id="conceptual-framework" class="section level2">
 <h2>2. Conceptual Framework</h2>
@@ -1539,6 +1557,9 @@ V(D) = E[\frac{\prod_{k=1}^{K} I(A_k = 𝒟ₖ(H_k))(\sum_{k=1}^{K} R_k)}{
 <p>Our <strong>goal</strong> is to determine the optimal DTRs <span class="math inline">\(D^*=(D_{1}^*,D_{2}^*,\dots, D_{K}^*)\)</span> that
 maximize the above value function. Note that <span class="math inline">\(D_{k}(H_k)=\text{sign}(f_{k}(H_k))\)</span>. For
 clarity, we sometimes denote the value function as <span class="math inline">\(V(f_1, f_2, ... , f_K)\)</span>.</p>
+</div>
+<div id="advanced-learning-methods-for-dtrs-and-itrs-estimation" class="section level2">
+<h2>Advanced Learning Methods for DTRs and ITRs Estimation</h2>
 <div id="augmented-outcome-weighted-learning" class="section level3">
 <h3>3.1 Augmented outcome-weighted learning</h3>
 <div id="introduction" class="section level4">
@@ -1737,9 +1758,14 @@ specified.</p>
 </div>
 <div id="example-1" class="section level4">
 <h4><span style="color:grey;">Example</span></h4>
-<p>In this repository, we give an example under continuous setting with
-correctly specified propensity model and no unmeasured confounders. The
-example code can be found: (<a href="https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning" class="uri">https://github.com/YeYao843/DTR-Method-Summary/tree/main/M-learning</a>)</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD In this repository, we give an
+example under continuous setting with correctly specified propensity
+model and no unmeasured confounders. The example code can be found: (<a href="https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/blob/main/M-Learning/S1_Obs_cts.py" class="uri">https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/blob/main/M-Learning/S1_Obs_cts.py</a>)
+======= In this repository, we give an example under continuous setting
+with correctly specified propensity model and no unmeasured confounders.
+The example code can be found: (<a href="https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/M-Learning/S1_Obs_cts.py" class="uri">https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/M-Learning/S1_Obs_cts.py</a>)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+f0b330a0fb3b914ee2ef0b96387d99c566f87c62</p>
 <p><em>Install the requirements before running the code</em>:</p>
 <pre><code>Python2: pip install -r requirements.txt 
 Python3: pip3 install -r rquirements.txt</code></pre>
@@ -2041,11 +2067,11 @@ parameter to be chosen data dependently</p>
 </div>
 <div id="example-3" class="section level4">
 <h4><span style="color:grey;">Example</span></h4>
-<p>(<a href="https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R" class="uri">https://github.com/YeYao843/DTR-Method-Summary/tree/main/CBR/example.R</a>)
-This example demonstrates the implementation of MRL with a linear
+<p>This example demonstrates the implementation of MRL with a linear
 kernel. The training dataset consists of <span class="math inline">\(n=200\)</span> samples. For additional examples,
 such as those using Gaussian kernels, please refer to the supplementary
 materials of the paper.</p>
+<p>The example code can be found: (<a href="https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/CBR/example.R" class="uri">https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/CBR/example.R</a>)</p>
 </div>
 </div>
 <div id="dtrs-to-control-stage-wise-risks" class="section level3">

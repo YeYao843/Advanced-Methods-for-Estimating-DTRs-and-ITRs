@@ -194,11 +194,9 @@ The doubly robust M-learning is consistent even if one of the propensity score m
 </p>
 
 #### <span style="color:grey;">Example</span>
-<<<<<<< HEAD
+
 In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/blob/main/M-Learning/S1_Obs_cts.py)
-=======
-In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-DTRs-and-ITRs/blob/main/M-Learning/S1_Obs_cts.py)
->>>>>>> f0b330a0fb3b914ee2ef0b96387d99c566f87c62
+
 
 *Install the requirements before running the code*:
 ```

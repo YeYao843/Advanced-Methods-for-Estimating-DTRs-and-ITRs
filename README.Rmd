@@ -195,6 +195,7 @@ The doubly robust M-learning is consistent even if one of the propensity score m
 
 #### <span style="color:grey;">Example</span>
 
+
 In this repository, we give an example under continuous setting with correctly specified propensity model and no unmeasured confounders. The example code can be found: (https://github.com/YeYao843/Advanced-Methods-for-Estimating-Dynamic-Treatment-Regimes-and-Individualized-Treatment-Rules/blob/main/M-Learning/S1_Obs_cts.py)
 
 
@@ -238,7 +239,8 @@ To extract information from EHR data and incorporate it into learning the optima
 </p>
 
 #### <span style="color:grey;">Example</span>
-An example under scenario (i), where all features are observed, was given. Kernel M-learning was performed under each strategy. 
+An example under scenario (i), where all features are observed, was given. Kernel M-learning was performed under each strategy.
+
 ### 4.2 Multi-Stage Augmented Q-Learning Estimator
 
 #### <span style="color:grey;">Introduction</span>
